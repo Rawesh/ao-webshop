@@ -13,13 +13,10 @@
 </head>
 <body>
 	<nav>
-		@foreach($categories as $category)
 		<ul>
-		  <li><header>Categorieën :</header></li>
-		  <li><a href="{{ route('homepage') }}">Alle</a></li>
-		  <li><a href="{{ url('/category/' . $category->id) }}">{{ $category->name }}</a></li>
+			<li><header>{{ $category }}</header></li>
+			<li><a href="{{ route('homepage') }}" id="back"><i class="fas fa-arrow-left"></i></a></li>
 		</ul>
-		@endforeach
 	</nav>
 
 	<article>

@@ -25,12 +25,29 @@ class HomeController extends Controller
     public function index()
     {
         $categories = DB::table('categories')->get();
-        $articles = DB::table('articles')->simplepaginate(5);;
+        $articles = DB::table('articles')->simplepaginate(5);
 
 
         return view('index', [
             'categories' => $categories,
             'articles' => $articles
         ]);
+    }
+
+    public function getArticlesByCategorie($category_id)
+    {
+        $articles = DB::table('article_categorie')
+                    ->select('name', 'price', 'description')
+                    ->join('articles', 'id', 'article_id')
+                    ->where('categorie_id', $category_id)
+                    ->simplepaginate(5);
+
+        $category = DB::table('categories')
+                    ->select('name')
+                    ->where('id', $category_id)
+                    ->get();
+
+
+        return view('category_articles', ['articles' => $articles])->withcategory($category);
     }
 }

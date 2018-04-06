@@ -15,6 +15,7 @@ class ArticleController extends Controller
     public function index()
     {
         $this->attach(2,1);
+        return view('link');
     }
 
     //create article

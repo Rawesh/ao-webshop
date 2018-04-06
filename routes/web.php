@@ -17,6 +17,10 @@
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
-// Route::get('/create', 'ArticleController@create');
+Route::get('/home', 'HomeController@index')->name('homepage');
+
+Route::get('/category/{id}', 'HomeController@getArticlesByCategorie');
+ 
+
+ // Route::get('/link', 'ArticleController@index');
 // Route::post('/createsave', 'ArticleController@createSave');
