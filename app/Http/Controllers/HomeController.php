@@ -28,11 +28,12 @@ class HomeController extends Controller
         $articles = DB::table('articles')->simplepaginate(5);
 
 
-        return view('index', [
+        return view('content/index', [
             'categories' => $categories,
             'articles' => $articles
         ]);
     }
+
 
     public function getArticlesByCategorie($category_id)
     {
@@ -43,11 +44,10 @@ class HomeController extends Controller
                     ->simplepaginate(5);
 
         $category = DB::table('categories')
-                    ->select('name')
                     ->where('id', $category_id)
                     ->get();
 
 
-        return view('category_articles', ['articles' => $articles])->withcategory($category);
+        return view('content/category_articles', ['articles' => $articles])->withcategory($category);
     }
 }

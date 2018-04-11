@@ -14,32 +14,10 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $this->attach(2,1);
+        $this->attach(10,5);
         return view('link');
     }
 
-    //create article
-    // public function create()
-    // {
-    //     return view('createarticle');
-    // }
-
-    // //createsave article
-    // public function createSave( Request $request)
-    // {
-    //     $this->validate($request, [
-    //         'name' => 'required',
-    //         'price' => 'required',
-    //         'description' => 'required'
-    //     ]);
-        
-    //     $article = new article;
-    //     $article->name = $request->input('name');
-    //     $article->price = $request->input('price');
-    //     $article->description = $request->input('description');
-
-    //     return redirect('/homepage')->with('succes', 'Post Created');
-    // }
    
     public function attach($article_id, $categorie_id)
     {
