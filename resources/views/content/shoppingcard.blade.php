@@ -19,21 +19,26 @@
 </nav>
 
 <article>
-
-    @foreach($item as $article)
+   
         <section>
-            <h1>{{ $article->name }}</h1>
-            <label>
-                Prijs: € 
-                <input type="number" value="{{ $article->price }}" disabled>
-            </label>
-            <br>
-            <label id="description">Beschrijving:</label>
-            <p>{{ $article->description }}</p>
-            <a href="{{ url('/shoppingcard/delete/' . $article->id) }}">verwijder</a>
-            <hr>
-        </section>
-    @endforeach
+            @foreach($item as $article)
+                <h1>{{ $article->name }}</h1>
+                <label>
+                    Prijs: € 
+                    <input type="number" value="{{ $article->price }}" disabled>
+                </label>
+                <br>
+                <label id="description">Beschrijving:</label>
+                <p>{{ $article->description }}</p>
+                <a href="{{ url('/shoppingcard/delete/' . $article->id) }}">Verwijder product</a>
+                <hr>
+            @endforeach
 
+            @if(sizeof($item) > 0)
+            <a href="{{ url('/shoppingcard/deleteAll/') }}">Verwijder alles</a>
+            @endif
+
+        </section>
+        
 </article>
 @endsection

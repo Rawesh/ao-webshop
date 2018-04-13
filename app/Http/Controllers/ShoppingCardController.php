@@ -29,12 +29,15 @@ class ShoppingCardController extends Controller
      */
     public function show(Request $request)
     {
-        $data = $request->session()->get('inventory');
+        $data = $request->session()->get('inventory');// array articles
         $item = [];
 
-        foreach ($data as $id)
+        if (is_array($data) || is_object($data))
         {
-            $item[] = Article::find($id);    
+            foreach ($data as $id)
+            {
+                $item[] = Article::find($id);// article table search id
+            }
         }
 
         return view("content/shoppingcard",compact('item'));
@@ -48,8 +51,40 @@ class ShoppingCardController extends Controller
      */
     public function delete(Request $request, $item_id)
     {
-        $data = $request->session()->forget('inventory', $item_id);
+        // get the array
+        $inventory = $request->session()->get('inventory');
 
-        return redirect('/home'); 
+        // cheack the array place
+        for ($i=0; count($inventory) > $i ;$i++)
+        {
+            if ($inventory[$i] === $item_id)
+            {
+                array_splice($inventory, $i, 1);// 3 arguments : 1= array 2=place 3=how many delete
+            }    
+        }
+
+        // empty yhe array
+        $request->session()->flush('inventory');
+
+        // if nut null set array
+        if ($inventory  !== null)
+        {
+            $request->session()->put('inventory', $inventory);
+        }
+
+        return redirect('/shoppingcard'); 
+    }
+
+        /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\ShoppingCard  $shoppingCard
+     * @return \Illuminate\Http\Response
+     */
+    public function deleteAll(Request $request)
+    {
+        $inventory = $request->session()->forget('inventory');
+
+        return redirect('/shoppingcard'); 
     }
 }
