@@ -1,0 +1,10 @@
+#totalLabel, #total
+{
+	float: right;
+}
+
+#order
+{
+	display: none;
+	margin-left: 40%;
+}

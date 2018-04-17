@@ -17,8 +17,34 @@ class ShoppingCardController extends Controller
      */
     public function add(Request $request, $article_id)
     { 
-        $request->session()->push("inventory", $article_id);
+        $inv = $request->session()->get("inventory");
+
+        $exists = false;
+
+        //check if exist
+        if (is_array($inv) || is_object($inv))
+        {
+            foreach ($inv as $value)
+            {
+                if($value == $article_id)
+                {
+                    $exists = true;
+                }
+            }
+
+        }
+        else
+        {
+            $request->session()->push("inventory", $article_id);
+            return redirect('/home');
+        }
+
+        if ($exists == false)
+        {
+            $request->session()->push("inventory", $article_id);
+        }
         return redirect('/home');
+
     }
 
     /**
@@ -31,7 +57,7 @@ class ShoppingCardController extends Controller
     {
         $data = $request->session()->get('inventory');// array articles
         $item = [];
-
+        //show articles
         if (is_array($data) || is_object($data))
         {
             foreach ($data as $id)
@@ -40,7 +66,23 @@ class ShoppingCardController extends Controller
             }
         }
 
-        return view("content/shoppingcard",compact('item'));
+        // set total price
+        
+        // $inputTotal = $request->input('total');
+
+        // $total=0;
+
+        // for ($i=0; count($item) > $i; $i++)
+        // { 
+        //     $total = $total + intval($item[$i]->price);
+        // }
+        
+
+        // $inputTotal = $total;
+
+
+
+        return view("content/shoppingcard",compact('item','inputTotal'));
     }
  
     /**
