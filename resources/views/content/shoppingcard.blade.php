@@ -19,41 +19,41 @@
         </div>
     </div>
 </nav>
-
 <article>
    
-        <section>
+    <section>
+        <form method="POST" action="{{ route('order') }}">
+            @csrf
             @foreach($item as $article)
-
                 <h1>{{ $article->name }}</h1>
+                <input type="hidden" name="article_id" value="{{ $article->id }}">
+
                 <label>
-                    Prijs: € 
-                    <input type="number" class="price" value="{{ $article->price }}" disabled>
+                Prijs: € 
+                <input type="number" class="price" value="{{ $article->price }}" disabled>
                 </label>
                 <br>
-                <label id="description">Beschrijving:</label>
-                <p>{{ $article->description }}</p>
-                <label>
-                    Aantal 
-                    <input type="number" value="1" name="quantity" class='quantity'>
-                </label>
+
+                <p><label>beschrijving</label>: {{ $article->description }}</p>
+            
+                <label>Aantal</label>
+                <input type="number" value="1" name="amount{{$article}}" class='quantity'>
                 <br>
-                <br>
+
                 <a href="{{ url('/shoppingcard/delete/' . $article->id) }}">Verwijder product</a>
-                <hr>
             @endforeach
 
-            <button onclick="calculateTotal()">Bereken totaal bedrag</button>
+            <input type="submit" id="order" value="Bestel">
+        </form>
 
-            <label id="totalLabel">totaal  
-            <input id="total" placeholder="0"  type="number" name="total" disabled>
-            </label>
+        <hr>
+        <button onclick="calculateTotal()">Bereken totaal bedrag</button>
 
-            <hr>
+        <label id="totalLabel">totaal  
+        <input id="total" placeholder="0"  type="number" name="total" disabled>
+        </label>
 
-            <button id="order"> <a href="{{ url('/shoppingcard/delete/' . $article->id) }}">Bestel</a></button>
-
-        </section>
+    </section>
         
 </article>
 @endsection
