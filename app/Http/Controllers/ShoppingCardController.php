@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Article;
 use App\Client;
 use App\Order;
+use Auth;
 use App\Order_detail;
 use App\ShoppingCard;
 use Illuminate\Http\Request;
@@ -138,33 +139,33 @@ class ShoppingCardController extends Controller
     **/
     public function order(Request $request)
     {
+        // get articles in shoppingcard
         $articles = $request->session()->get("inventory");
 
+        //get user
         $user = Auth::user();
-        //client id not found
-        $client_id = $user
-        //get client id to make order
-        $client = Client::find($id);
+        
+        // relate user to client
+        $client = $user->client;
 
         //create order whit the client id
         $order = Order::create([
-            'client_id' => $client_id,
+            'client_id' => $client->id,
         ]);
 
-        //make order detail 
+        //make order detail for one article
         foreach ($articles as $article)
         {
             $order_detail = Order_detail::create([
             'article_id' => $article,
-            'amount' => $_POST['amount' . $article],
+            'amount' => $request->input('amount' . $article),
             'order_id' => $order->id,
             ]);
         }
-         
-        //new order met  client id
-        //order-> meerdere new order details
-        //order details = items + hoeveel
 
+        // when make order shoppingcart is empty
+        $inventory = $request->session()->forget('inventory');
 
+         return redirect('/home'); 
     }
 }

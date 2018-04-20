@@ -37,7 +37,7 @@
                 <p><label>beschrijving</label>: {{ $article->description }}</p>
             
                 <label>Aantal</label>
-                <input type="number" value="1" name="amount{{$article}}" class='quantity'>
+                <input type="number" value="1" name="amount{{$article->id}}" class='quantity'>
                 <br>
 
                 <a href="{{ url('/shoppingcard/delete/' . $article->id) }}">Verwijder product</a>
