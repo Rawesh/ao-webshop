@@ -24,6 +24,6 @@ Route::get('/shoppingcard/add/{articleId}', 'ShoppingCardController@add');
 Route::get('/shoppingcard/delete/{articleId}', 'ShoppingCardController@delete');
 Route::get('/shoppingcard/deleteAll', 'ShoppingCardController@deleteAll');
 Route::POST('/shoppingcard/order', 'ShoppingCardController@order')->name('order');
-
+Route::get('/shoppingcard/myorder', 'ShoppingCardController@myOrders')->name('myOrders');
  Route::get('/link', 'ArticleController@index');
 // Route::post('/createsave', 'ArticleController@createSave');

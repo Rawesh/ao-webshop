@@ -14,7 +14,8 @@
 
             <!-- right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
-            	<li><a href="{{ route('homepage') }}" class="nav-link">homepage</a></li>
+                <li><a href="{{ route('myOrders') }}" class="nav-link">Mijn bestellingen</a></li>
+            	<li><a href="{{ route('homepage') }}" class="nav-link">Home</a></li>
             </ul>
         </div>
     </div>
@@ -37,7 +38,7 @@
                 <p><label>beschrijving</label>: {{ $article->description }}</p>
             
                 <label>Aantal</label>
-                <input type="number" value="1" name="amount{{$article->id}}" class='quantity'>
+                <input type="number" value="1" name="amount{{$article->id}}" class='quantity' onchange="changeQuantity({{ $article->id }})">
                 <br>
 
                 <a href="{{ url('/shoppingcard/delete/' . $article->id) }}">Verwijder product</a>

@@ -8,6 +8,7 @@ use Auth;
 use App\Order_detail;
 use App\ShoppingCard;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ShoppingCardController extends Controller
 {
@@ -167,5 +168,28 @@ class ShoppingCardController extends Controller
         $inventory = $request->session()->forget('inventory');
 
          return redirect('/home'); 
+    }
+
+    public function myOrders(Request $request)
+    {
+         //get user
+        $user = Auth::user();
+        
+        // relate user to client
+        $client = $user->client;
+
+        // relate client to order
+        $orders = $client->orders;
+
+        $order_details = [];
+
+        foreach ($orders as $order)
+        {
+            $order_details[] = $order->order_details;
+        }
+
+         return view('content/myorders', [
+            'order' => $order_details
+        ]);        
     }
 }
