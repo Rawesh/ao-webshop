@@ -70,23 +70,6 @@ class ShoppingCardController extends Controller
                 $item[] = Article::find($id);// article table search id
             }
         }
-
-        // set total price
-        
-        // $inputTotal = $request->input('total');
-
-        // $total=0;
-
-        // for ($i=0; count($item) > $i; $i++)
-        // { 
-        //     $total = $total + intval($item[$i]->price);
-        // }
-        
-
-        // $inputTotal = $total;
-
-
-
         return view("content/shoppingcard",compact('item','inputTotal'));
     }
  
@@ -188,8 +171,22 @@ class ShoppingCardController extends Controller
             $order_details[] = $order->order_details;
         }
 
-         return view('content/myorders', [
+
+        //get name of id
+        foreach ($order_details as $details)// the orders
+        {
+            foreach ($details as $detail)// one order
+            {
+                // set order article id in article name
+                $articles = Article::find($detail->article_id);
+                $detail->article_id= $articles->name;
+            }
+        }
+        
+        //dd(Article::find($order_details[2][0]->article_id)->name);
+
+        return view('content/myorders', [
             'order' => $order_details
-        ]);        
+        ])->with('articles', $articles);        
     }
 }

@@ -27,12 +27,12 @@
             @foreach($order_details as $order_detail)
                 <tr>
 
-                    <td>{{ $order_detail->id }}</td>
+                    <td>{{ $order_detail->article_id }}</td>
                     <td>{{ $order_detail->amount }}</td>
                     <td>{{ $order_detail->created_at }}</td>
                 </tr>
             @endforeach
         @endforeach
-    </table>    
+    </table>
 </article>
 @endsection
