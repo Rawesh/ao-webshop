@@ -8,3 +8,40 @@
 	display: none;
 	margin-left: 40%;
 }
+
+table 
+{
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th 
+{
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+tr:nth-child(even)
+{
+	background-color: pink;
+}
+
+tr:nth-child(odd)
+{
+	background-color: lightblue;
+}
+
+tr:hover
+{
+	background-color: orange;
+}
+
+th
+{
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: yellow;
+    color: green;
+}

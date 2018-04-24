@@ -20,8 +20,9 @@
 <article>
     <table>
         <tr>
-           <th>artikelen</th>
-           <th>aantal</th> 
+           <th>Artikelen</th>
+           <th>Aantal</th>
+           <th>Datum van order</th> 
         </tr>
         @foreach($order as $order_details)
             @foreach($order_details as $order_detail)
